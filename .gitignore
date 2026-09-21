@@ -1,0 +1,9 @@
+# Sub-repositorios gestionados de forma independiente
+4Guard_FE_UI/
+4guard_be/
+
+# Archivos de entorno y temporales del sistema
+.idea/
+*.log
+.DS_Store
+Thumbs.db
