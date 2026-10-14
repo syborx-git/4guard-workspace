@@ -7,3 +7,9 @@
 *.log
 .DS_Store
 Thumbs.db
+
+# Confidential documents & Excel files
+KPI'S Nuevos/
+*.xlsx
+*.xls
+
