@@ -96,10 +96,18 @@ sequenceDiagram
    - `IN_PROGRESS`: Descarga física en curso y captura de tarimas.
    - `DISCHARGED`: Descarga física concluida por el montacarguista.
    - `COMPLETED`: Recepción autorizada por el supervisor; inventario ingresado al sistema.
-3. **Captura Granular de Parámetros por Tarima:**
+3. **Captura Granular de Parámetros por Tarima & Política de Vida Útil Remanente (% Shelf-Life):**
    - Cada tarima física (UA) cuenta con su propio lote, fecha de caducidad, piezas y remisión.
    - Se valida que la fecha de caducidad no sea igual o anterior a la fecha de elaboración/fabricación.
    - Si una remisión contiene múltiples tarimas con distintos lotes, la suma de piezas y peso bruto se calcula en tiempo real.
+   - **Matriz de Aceptación de Vida Útil para Evitar Caducos:**
+     - Se calcula la vida útil total del material ($\text{Fecha Caducidad} - \text{Fecha Elaboración}$) y el porcentaje de vida útil restante ($\text{Fecha Caducidad} - \text{Hoy}$).
+     - **Material con Vida Total < 24 meses:** Requiere mantener **al menos el 75% de vida restante** para aceptación directa.
+     - **Material con Vida Total ≥ 24 meses:** Requiere mantener **al menos el 50% de vida restante** para aceptación directa.
+   - **Gestión de Situaciones Excepcionales (MRP & Planeación de la Demanda):**
+     - Cualquier lote que no cumpla con los umbrales mínimos (vida restante < 75% o < 50%) queda catalogado como *Situación Excepcional / Riesgo de Caducidad*.
+     - Conforme a la política de negocio, estas situaciones deben ser comunicadas y aprobadas previamente por el **MRP**, en conjunto con el equipo de **Planeación de la Demanda y Fábrica Receptora** mediante una evaluación de riesgo, definiendo formalmente la factibilidad de recepción y **quién absorbe el costo asociado** ante un eventual caduco.
+     - En la Mesa de Control WMS, el sistema bloquea el avance directo y exige **Autorización Supervisada / Gerencial** registrando usuario autorizador, contraseña/PIN y la justificación formal (ej. *Acuerdo MRP / Planeación con Fábrica*).
 4. **Ergonomía UI/UX:**
    - **Bloqueo de Ficha:** El botón `[Modificar Ficha]` solo es accesible cuando el estatus es `REGISTERED`. Una vez iniciada la descarga (`IN_PROGRESS` en adelante), la ficha queda protegida contra manipulaciones.
    - **Ubicación de Botones:** Los botones de acción (`[Guardar Ajustes]`, `[Finalizar Descarga]`, `[Autorizar Recepción]`) se ubican inmediatamente debajo de la tabla de tarimas.
