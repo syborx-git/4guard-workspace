@@ -86,6 +86,8 @@ services:
     restart: unless-stopped
     depends_on:
       - 4guard-backend
+    volumes:
+      - ./4Guard_FE_UI/nginx.conf:/etc/nginx/nginx.conf:ro
     ports:
       # Puertos Host : Puertos Contenedor (No interfieren con puertos 80/443 de tu app de producción)
       - "8081:8080" # Consola Web Admin → http://<TU_IP_HETZNER>:8081
