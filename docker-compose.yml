@@ -57,6 +57,7 @@ services:
       SPRING_DATASOURCE_URL: jdbc:postgresql://4guard-db:5432/4guard_db
       SPRING_DATASOURCE_USERNAME: postgres
       SPRING_DATASOURCE_PASSWORD: admin_password_4guard
+      SECURITY_CORS_ALLOWED_ORIGIN_PATTERNS: "*"
       # JVM optimizada: SerialGC, heap acotado a 200MB, metaspace 140MB
       JAVA_OPTS: "-Xms64m -Xmx200m -Xss256k -XX:+UseSerialGC -XX:MaxMetaspaceSize=140m -XX:ReservedCodeCacheSize=40m -XX:+TieredCompilation -XX:TieredStopAtLevel=1"
     deploy:
