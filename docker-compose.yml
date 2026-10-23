@@ -26,6 +26,8 @@ services:
       POSTGRES_PASSWORD: admin_password_4guard
     volumes:
       - 4guard_pgdata:/var/lib/postgresql/data
+    ports:
+      - "5433:5432"
     deploy:
       resources:
         limits:
